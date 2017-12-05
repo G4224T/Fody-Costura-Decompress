@@ -32,6 +32,7 @@
             this.outputFileLabel = new System.Windows.Forms.Label();
             this.inputFileButton = new System.Windows.Forms.Button();
             this.outputFileButton = new System.Windows.Forms.Button();
+            this.decompButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // inputFileLabel
@@ -72,11 +73,22 @@
             this.outputFileButton.UseVisualStyleBackColor = true;
             this.outputFileButton.Click += new System.EventHandler(this.outputFileButton_Click);
             // 
+            // decompButton
+            // 
+            this.decompButton.Location = new System.Drawing.Point(68, 233);
+            this.decompButton.Name = "decompButton";
+            this.decompButton.Size = new System.Drawing.Size(836, 60);
+            this.decompButton.TabIndex = 4;
+            this.decompButton.Text = "De-Compress and Create";
+            this.decompButton.UseVisualStyleBackColor = true;
+            this.decompButton.Click += new System.EventHandler(this.decompButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 342);
+            this.ClientSize = new System.Drawing.Size(993, 342);
+            this.Controls.Add(this.decompButton);
             this.Controls.Add(this.outputFileButton);
             this.Controls.Add(this.inputFileButton);
             this.Controls.Add(this.outputFileLabel);
@@ -94,6 +106,7 @@
         private System.Windows.Forms.Label outputFileLabel;
         private System.Windows.Forms.Button inputFileButton;
         private System.Windows.Forms.Button outputFileButton;
+        private System.Windows.Forms.Button decompButton;
     }
 }
 
