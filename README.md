@@ -1,5 +1,7 @@
 # Fody-Costura-Decompress
 
+See https://github.com/fody/costura for further details on Fody.
+
 The Fody-Costura Library for .NET 4.5 (and over) compresses resources and adds them into an assembly automatically at compile time to reduce the number of files required for distribution.
 
 To de-compile a .NET assembly, the resources are required. Most de-compilers can extract the resources but they are extracted as compressed files with a .zip extension. The .zip extension is incompatible with the standard zip file format. 
