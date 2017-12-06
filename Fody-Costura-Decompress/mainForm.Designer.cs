@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.inputFileLabel = new System.Windows.Forms.Label();
-            this.outputFileLabel = new System.Windows.Forms.Label();
             this.inputFileButton = new System.Windows.Forms.Button();
-            this.outputFileButton = new System.Windows.Forms.Button();
             this.decompButton = new System.Windows.Forms.Button();
+            this.doneLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // inputFileLabel
@@ -44,15 +43,6 @@
             this.inputFileLabel.TabIndex = 0;
             this.inputFileLabel.Text = "Input File [*.zip]";
             // 
-            // outputFileLabel
-            // 
-            this.outputFileLabel.AutoSize = true;
-            this.outputFileLabel.Location = new System.Drawing.Point(271, 161);
-            this.outputFileLabel.Name = "outputFileLabel";
-            this.outputFileLabel.Size = new System.Drawing.Size(87, 20);
-            this.outputFileLabel.TabIndex = 1;
-            this.outputFileLabel.Text = "Output File";
-            // 
             // inputFileButton
             // 
             this.inputFileButton.Location = new System.Drawing.Point(68, 64);
@@ -63,18 +53,9 @@
             this.inputFileButton.UseVisualStyleBackColor = true;
             this.inputFileButton.Click += new System.EventHandler(this.inputFileButton_Click);
             // 
-            // outputFileButton
-            // 
-            this.outputFileButton.Location = new System.Drawing.Point(68, 142);
-            this.outputFileButton.Name = "outputFileButton";
-            this.outputFileButton.Size = new System.Drawing.Size(141, 59);
-            this.outputFileButton.TabIndex = 3;
-            this.outputFileButton.Text = "Select Output File";
-            this.outputFileButton.UseVisualStyleBackColor = true;
-            this.outputFileButton.Click += new System.EventHandler(this.outputFileButton_Click);
-            // 
             // decompButton
             // 
+            this.decompButton.Enabled = false;
             this.decompButton.Location = new System.Drawing.Point(68, 233);
             this.decompButton.Name = "decompButton";
             this.decompButton.Size = new System.Drawing.Size(836, 60);
@@ -83,15 +64,26 @@
             this.decompButton.UseVisualStyleBackColor = true;
             this.decompButton.Click += new System.EventHandler(this.decompButton_Click);
             // 
+            // doneLabel
+            // 
+            this.doneLabel.AutoSize = true;
+            this.doneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.doneLabel.ForeColor = System.Drawing.Color.Red;
+            this.doneLabel.Location = new System.Drawing.Point(435, 304);
+            this.doneLabel.Name = "doneLabel";
+            this.doneLabel.Size = new System.Drawing.Size(71, 29);
+            this.doneLabel.TabIndex = 5;
+            this.doneLabel.Text = "Done";
+            this.doneLabel.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 342);
+            this.Controls.Add(this.doneLabel);
             this.Controls.Add(this.decompButton);
-            this.Controls.Add(this.outputFileButton);
             this.Controls.Add(this.inputFileButton);
-            this.Controls.Add(this.outputFileLabel);
             this.Controls.Add(this.inputFileLabel);
             this.Name = "MainForm";
             this.Text = "Fody-Costura-Decompress";
@@ -103,10 +95,9 @@
         #endregion
 
         private System.Windows.Forms.Label inputFileLabel;
-        private System.Windows.Forms.Label outputFileLabel;
         private System.Windows.Forms.Button inputFileButton;
-        private System.Windows.Forms.Button outputFileButton;
         private System.Windows.Forms.Button decompButton;
+        private System.Windows.Forms.Label doneLabel;
     }
 }
 
