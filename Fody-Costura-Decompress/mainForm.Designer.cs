@@ -51,7 +51,7 @@
             this.inputFileButton.TabIndex = 2;
             this.inputFileButton.Text = "Select Input File";
             this.inputFileButton.UseVisualStyleBackColor = true;
-            this.inputFileButton.Click += new System.EventHandler(this.inputFileButton_Click);
+            this.inputFileButton.Click += new System.EventHandler(this.InputFileButton_Click);
             // 
             // decompButton
             // 
@@ -62,7 +62,7 @@
             this.decompButton.TabIndex = 4;
             this.decompButton.Text = "De-Compress and Create";
             this.decompButton.UseVisualStyleBackColor = true;
-            this.decompButton.Click += new System.EventHandler(this.decompButton_Click);
+            this.decompButton.Click += new System.EventHandler(this.DecompButton_Click);
             // 
             // doneLabel
             // 

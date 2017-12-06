@@ -15,27 +15,25 @@ namespace Fody_Costura_Decompress
     public partial class MainForm : Form
     {
 
-        FileInfo fileToDeCompressInfo;
+        FileInfo _fileToDeCompressInfo;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void inputFileButton_Click(object sender, EventArgs e)
+        private void InputFileButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            DialogResult openResult;
-            openDialog.Multiselect = false;
+            var openDialog = new OpenFileDialog {Multiselect = false};
 
 
             doneLabel.Visible = false;
-            openResult = openDialog.ShowDialog();
+            var openResult = openDialog.ShowDialog();
 
             if (openResult == DialogResult.OK)
             {
                 inputFileLabel.Text = openDialog.FileName;
-                fileToDeCompressInfo = new FileInfo(openDialog.FileName);
+                _fileToDeCompressInfo = new FileInfo(openDialog.FileName);
                 decompButton.Enabled = true;
             }
 
@@ -44,17 +42,17 @@ namespace Fody_Costura_Decompress
        
 
 
-        private void decompButton_Click(object sender, EventArgs e)
+        private void DecompButton_Click(object sender, EventArgs e)
         {
 
-                using (FileStream originalFileStream = File.OpenRead(fileToDeCompressInfo.FullName))
+                using (var originalFileStream = File.OpenRead(_fileToDeCompressInfo.FullName))
                 {
-                    string currentFileName = fileToDeCompressInfo.FullName.ToString();
-                    string newFileName = currentFileName.Remove(currentFileName.Length - fileToDeCompressInfo.Extension.Length);
+                    var currentFileName = _fileToDeCompressInfo.FullName.ToString();
+                    var newFileName = currentFileName.Remove(currentFileName.Length - _fileToDeCompressInfo.Extension.Length);
 
-                    using (FileStream decompressedFileStream = File.Create(newFileName))
+                    using (var decompressedFileStream = File.Create(newFileName))
                     {
-                        using (DeflateStream decompressionStream = new DeflateStream(originalFileStream, CompressionMode.Decompress))
+                        using (var decompressionStream = new DeflateStream(originalFileStream, CompressionMode.Decompress))
                         {
                             decompressionStream.CopyTo(decompressedFileStream);
                             doneLabel.Visible = true;
