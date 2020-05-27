@@ -15,51 +15,68 @@ namespace Fody_Costura_Decompress
     public partial class MainForm : Form
     {
 
-        FileInfo _fileToDeCompressInfo;
+        FileInfo _sourceFileInfo;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
+        private void ProcessFile(FileInfo sourceFile, string destinationFileName, bool compress)
+        {
+            using (var originalFileStream = File.OpenRead(_sourceFileInfo.FullName))
+                using (var destinationFileStream = File.Create(destinationFileName))
+                    if (compress)
+                        using (var compressionStream = new DeflateStream(destinationFileStream, CompressionMode.Compress))
+                            originalFileStream.CopyTo(compressionStream);
+                    else
+                        using (var decompressionStream = new DeflateStream(originalFileStream, CompressionMode.Decompress))
+                            decompressionStream.CopyTo(destinationFileStream);
+        }
+
         private void InputFileButton_Click(object sender, EventArgs e)
         {
             var openDialog = new OpenFileDialog {Multiselect = false};
 
-
-            doneLabel.Visible = false;
             var openResult = openDialog.ShowDialog();
 
             if (openResult == DialogResult.OK)
             {
-                inputFileLabel.Text = openDialog.FileName;
-                _fileToDeCompressInfo = new FileInfo(openDialog.FileName);
-                decompButton.Enabled = true;
+                selectedFileTextBox.Text = openDialog.FileName;
+                _sourceFileInfo = new FileInfo(openDialog.FileName);
+                decompressButton.Enabled = true;
+                compressButton.Enabled = true;
             }
-
         }
 
-       
-
-
-        private void DecompButton_Click(object sender, EventArgs e)
+        private void DecompressButton_Click(object sender, EventArgs e)
         {
+            var sourceFileName = _sourceFileInfo.FullName.ToString();
+            var inflatedFileName = sourceFileName.Remove(sourceFileName.Length - _sourceFileInfo.Extension.Length);
+            try
+            {
+                ProcessFile(_sourceFileInfo, inflatedFileName, false);
+                System.Windows.Forms.MessageBox.Show("Successfully inflated " + _sourceFileInfo.Name);
+            }
+            catch (Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("Error when inflating file: " + err.ToString());
+            }
+        }
 
-                using (var originalFileStream = File.OpenRead(_fileToDeCompressInfo.FullName))
-                {
-                    var currentFileName = _fileToDeCompressInfo.FullName.ToString();
-                    var newFileName = currentFileName.Remove(currentFileName.Length - _fileToDeCompressInfo.Extension.Length);
-
-                    using (var decompressedFileStream = File.Create(newFileName))
-                    {
-                        using (var decompressionStream = new DeflateStream(originalFileStream, CompressionMode.Decompress))
-                        {
-                            decompressionStream.CopyTo(decompressedFileStream);
-                            doneLabel.Visible = true;
-                        }
-                    }
-                }
-         
+        private void compressButton_Click(object sender, EventArgs e)
+        {
+            var sourceFileName = _sourceFileInfo.FullName.ToString();
+            var deflatedFileName = sourceFileName + ".compressed";
+            try
+            {
+                ProcessFile(_sourceFileInfo, deflatedFileName, true);
+                System.Windows.Forms.MessageBox.Show("Successfully deflated " + _sourceFileInfo.Name);
+            }
+            catch (Exception err)
+            {
+                System.Windows.Forms.MessageBox.Show("Error when deflating file: " + err.ToString());
+            }
         }
     }
 }
